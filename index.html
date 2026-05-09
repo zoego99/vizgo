@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="page-generator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資訊圖 Prompt 生成器</title>
+<link rel="icon" href="./logo2.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo"><img src="./logo.svg" alt="" class="logo"></div>
+    <div class="nav-text">
+      <span class="nav-title">資訊圖 Prompt 生成器</span>
+      <!-- ★ 修改這裡換成你的名字和 Email ★ -->
+      <span class="nav-sub">心怡｜zoego99@gmail.com</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Prompt 生成器</a>
+    <a href="gallery.html">視覺風格 畫廊</a>
+  </div>
+</nav>
+
+<!-- ===== THREE-COLUMN LAYOUT ===== -->
+<div class="app-layout">
+
+  <!-- ===== LEFT COLUMN ===== -->
+  <div class="col col-left">
+    <div class="col-header">設定條件</div>
+    
+
+    <!-- 1. 輸出格式與尺寸 -->
+    <div class="form-section">
+      <div class="section-title">
+        <div class="section-num">1</div>
+        <span class="section-label-text">輸出格式與尺寸</span>
+      </div>
+      <div class="chip-group" id="size-chips">
+        <div class="chip selected" data-value="簡報 16:9（橫向）">簡報 16:9</div>
+        <div class="chip" data-value="海報 3:4（直式）">海報 3:4</div>
+        <div class="chip" data-value="方形 1:1（社群貼文）">文宣 1:1</div>
+        <div class="chip" data-value="A4 直式（報告文件）">A4 直式</div>
+      </div>
+    </div>
+
+    <!-- 2. 應用場景 -->
+    <div class="form-section">
+      <div class="section-title">
+        <div class="section-num">2</div>
+        <span class="section-label-text">應用場景</span>
+      </div>
+      <select class="styled-select" id="scene-select">
+        <option value="">— 請選擇場景 —</option>
+        <option value="數據分析與洞察報告">📊 數據分析與洞察報告</option>
+        <option value="邏輯流程與時間軸說明">🔄 邏輯流程與時間軸說明</option>
+        <option value="教育科普與知識傳遞">🎓 教育科普與知識傳遞</option>
+        <option value="專業研究與科學圖表">🔬 專業研究與科學圖表</option>
+        <option value="創意發想與腦力激盪">💡 創意發想與腦力激盪</option>
+        <option value="社群行銷與視覺傳播">📱 社群行銷與視覺傳播</option>
+        <option value="企業簡報與商業提案">💼 企業簡報與商業提案</option>
+        <option value="健康醫療衛教資訊">🏥 健康醫療衛教資訊</option>
+      </select>
+    </div>
+
+    <!-- 3. 視覺風格 -->
+    <div class="form-section">
+      <div class="section-title">
+        <div class="section-num">3</div>
+        <span class="section-label-text">視覺風格</span>
+      </div>
+      <select class="styled-select" id="style-select">
+        <option value="">— 請選擇風格 —</option>
+        <optgroup label="── 群組一：精準資訊視覺化 ──">
+          <option value="1">極簡向量插畫風格</option>
+          <option value="2">專業科學繪圖風格</option>
+          <option value="3">現代數據儀表板風</option>
+          <option value="4">微霧玻璃質感（Glassmorphism）</option>
+        </optgroup>
+        <optgroup label="── 群組二：手工溫度 ──">
+          <option value="5">手繪感筆記風格</option>
+          <option value="6">白板板書風格</option>
+        </optgroup>
+        <optgroup label="── 群組三：3D 立體造型 ──">
+          <option value="7">3D 黏土質感</option>
+          <option value="8">盲盒公仔風格</option>
+          <option value="9">積木風格</option>
+          <option value="10">等距視角微縮風格</option>
+        </optgroup>
+        <optgroup label="── 群組四：插畫敘事 ──">
+          <option value="11">社論雜誌插畫感</option>
+          <option value="12">日系動漫風格</option>
+          <option value="13">日系清新風格</option>
+        </optgroup>
+        <optgroup label="── 群組五：版面結構 ──">
+          <option value="14">便當盒排版法</option>
+          <option value="15">專業科學繪圖（版面型）</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <!-- 4. 版面配置 -->
+    <div class="form-section">
+      <div class="section-title">
+        <div class="section-num">4</div>
+        <span class="section-label-text">版面配置</span>
+      </div>
+      <select class="styled-select" id="layout-select">
+        <option value="">— AI 自動優化排版 —</option>
+        <option value="便當盒排版（模組化分割）">便當盒排版（模組化分割）</option>
+        <option value="蛇形流程（步驟引導路徑）">蛇形流程（步驟引導路徑）</option>
+        <option value="中心對焦（核心放射）">中心對焦（核心放射）</option>
+        <option value="層級金字塔（深度架構）">層級金字塔（深度架構）</option>
+        <option value="垂直時間軸（演進歷程）">垂直時間軸（演進歷程）</option>
+        <option value="網格矩陣（整齊規整）">網格矩陣（整齊規整）</option>
+        <option value="左右對比（分析對照）">左右對比（分析對照）</option>
+      </select>
+    </div>
+
+    <!-- 5. 簡報母片設定 -->
+    <div class="form-section">
+      <div class="section-title">
+        <div class="section-num">5</div>
+        <span class="section-label-text">簡報母片設定</span>
+      </div>
+      <label class="check-row">
+        <input type="checkbox" id="ppt-header-space">
+        <span>預留上方 30% 標題空白區</span>
+      </label>
+      <label class="check-row">
+        <input type="checkbox" id="ppt-no-text">
+        <span>純圖示版（不含文字說明）</span>
+      </label>
+    </div>
+
+    <!-- 6. 文字內容 -->
+    <div class="form-section">
+      <div class="section-title">
+        <div class="section-num">6</div>
+        <span class="section-label-text">文字內容（選填）</span>
+      </div>
+      <div class="input-field-label">主標題</div>
+      <textarea class="styled-textarea" id="txt-main" rows="2" placeholder="例：2025 AI 應用趨勢"></textarea>
+      <div class="input-field-label">副標題</div>
+      <textarea class="styled-textarea" id="txt-sub" rows="2" placeholder="例：從數據看未來"></textarea>
+      <div class="input-field-label">重點訊息 / CTA</div>
+      <textarea class="styled-textarea" id="txt-cta" rows="2" placeholder="例：掃碼了解更多"></textarea>
+    </div>
+
+    <!-- 7. 補充描述 -->
+    <div class="form-section">
+      <div class="section-title">
+        <div class="section-num">7</div>
+        <span class="section-label-text">補充描述（選填）</span>
+      </div>
+      <textarea class="styled-textarea" id="txt-extra" placeholder="畫面主題、內容要點、配色氛圍、特殊要求…"></textarea>
+    </div>
+
+  </div><!-- end col-left -->
+
+  <!-- ===== MIDDLE COLUMN ===== -->
+  <div class="col col-mid">
+    <div class="col-header">風格細項選擇</div>
+
+    <div class="preview-box">
+      <div class="preview-thumb" id="preview-thumb" onclick="openLightbox()">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="4" y="8" width="40" height="30" rx="3" stroke="#6B6760" stroke-width="1.5"/>
+          <circle cx="16" cy="20" r="4" stroke="#6B6760" stroke-width="1.5"/>
+          <path d="M4 32l10-8 8 7 6-5 16 11" stroke="#6B6760" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="preview-thumb-label" id="preview-label">請先在左欄選擇視覺風格，<br>此處將顯示風格參考圖</span>
+        <span class="preview-zoom-hint hidden" id="zoom-hint">點擊放大</span>
+      </div>
+    </div>
+
+    <div class="style-panel" id="style-panel">
+      <p style="font-size:13px;color:var(--text-light);text-align:center;padding:24px 0;">
+        選擇視覺風格後，在此選擇細項條件
+      </p>
+    </div>
+
+  </div><!-- end col-mid -->
+
+  <!-- ===== RIGHT COLUMN ===== -->
+  <div class="col col-right">
+    <div class="col-header">生成的 Prompt 指令</div>
+
+    <div class="prompt-output-area">
+
+      <div class="prompt-block" id="prompt-summary">
+        <div class="prompt-block-title">指令摘要</div>
+        <div class="prompt-items" id="prompt-items-list">
+          <div class="prompt-empty">尚未設定任何條件，<br>請從左欄開始選擇</div>
+        </div>
+      </div>
+
+      <div class="prompt-editable-wrap">
+        <div class="prompt-editable-header">
+          <span class="prompt-editable-title">完整指令（可直接編輯）</span>
+          <span class="copy-success" id="copy-success">✓ 已複製</span>
+        </div>
+        <textarea class="prompt-editable-textarea" id="prompt-textarea" placeholder="指令內容將在此自動生成，您可直接修改後使用…"></textarea>
+      </div>
+
+      <div class="prompt-actions">
+        <button class="btn btn-primary" onclick="copyPrompt()">複製指令</button>
+        <button class="btn btn-secondary" onclick="resetAll()">重設全部</button>
+      </div>
+
+      <div style="background:var(--indigo-light);border:1px solid #C5D0E8;border-radius:var(--radius);padding:12px;font-size:12px;color:var(--indigo-dark);line-height:1.6;">
+        <strong>使用提示：</strong>複製上方指令後，貼入 Gemini、ChatGPT 等 AI 生圖工具即可使用。完整指令已為 AI 最佳化，您亦可手動編輯後再貼入。
+      </div>
+      <p class="month">製作年月：2026/05</p>
+
+    </div>
+  </div><!-- end col-right -->
+
+</div><!-- end app-layout -->
+
+<!-- ===== LIGHTBOX (preview) ===== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+</div>
+
+<script src="script-generator.js"></script>
+</body>
+</html>
