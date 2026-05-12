@@ -462,7 +462,7 @@ const STYLES = {
 // ===================================================
 // STATE
 // ===================================================
-let selectedSize  = "簡報 16:9（橫向）";
+let selectedSize  = "橫向 16:9";
 let selectedScene = "";
 let selectedStyle = "";
 let selectedLayout = "";
@@ -786,7 +786,7 @@ function resetAll() {
   document.querySelectorAll('#size-chips .chip').forEach((c, i) => {
     c.classList.toggle('selected', i === 0);
   });
-  selectedSize = "簡報 16:9（橫向）";
+  selectedSize = "橫向 16:9";
 
   // Selects
   document.getElementById('scene-select').value  = '';
