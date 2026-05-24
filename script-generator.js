@@ -538,7 +538,9 @@ function renderStylePanel(styleId) {
 
   if (!styleId || !STYLES[styleId]) {
     panel.innerHTML = '<p style="font-size:13px;color:var(--text-light);text-align:center;padding:24px 0;">選擇視覺風格後，在此選擇細項條件</p>';
+    previewLabel.style.display = '';
     previewLabel.innerHTML = '請先在左欄選擇視覺風格，<br>此處將顯示風格參考圖';
+    previewThumb.style.backgroundImage = 'none';
     zoomHint.classList.add('hidden');
     previewThumb.style.cursor = 'default';
     return;
@@ -546,11 +548,16 @@ function renderStylePanel(styleId) {
 
   const style = STYLES[styleId];
   
-  // Update preview area
-  // previewLabel.textContent = style.previewLabel + '（佔位圖，請替換）';
+  // Update preview area — 只更新背景圖，不覆蓋整個 innerHTML，
+  // 以免破壞 preview-label / zoom-hint 等子元素
   if (style.previewImg) {
-    previewThumb.innerHTML = '<img src="' + style.previewImg + '" alt="' + style.previewLabel + '" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">';
+    previewThumb.style.backgroundImage  = 'url("' + style.previewImg + '")';
+    previewThumb.style.backgroundSize   = 'cover';
+    previewThumb.style.backgroundPosition = 'center';
+    previewLabel.style.display = 'none';
   } else {
+    previewThumb.style.backgroundImage = 'none';
+    previewLabel.style.display = '';
     previewLabel.textContent = style.previewLabel + '（圖片待補充）';
   }
   zoomHint.classList.remove('hidden');
