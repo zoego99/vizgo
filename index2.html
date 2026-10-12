@@ -26,7 +26,10 @@
 <div class="app">
   <!-- ===== LEFT：選擇視覺風格 ===== -->
   <aside class="side">
-    <div class="side-head"><span class="num">1</span>選擇視覺風格</div>
+    <div class="side-head">
+      <div class="side-title"><span class="num">1</span>選擇視覺風格</div>
+      <div class="aud-row" id="aud-row"></div>
+    </div>
     <div id="side-list"></div>
   </aside>
 
@@ -38,8 +41,9 @@
 <div class="lb" id="lb" onclick="if(event.target===this)closeLb()">
   <div class="lb-box">
     <button class="lb-close" onclick="closeLb()">✕</button>
-    <div class="lb-img-wrap">
+    <div class="lb-img-wrap" id="lb-wrap">
       <img id="lb-img" src="" alt="">
+      <div class="lb-missing">範例圖待補充</div>
       <button class="lb-arrow prev" onclick="lbNav(-1)">&#8592;</button>
       <button class="lb-arrow next" onclick="lbNav(1)">&#8594;</button>
     </div>
