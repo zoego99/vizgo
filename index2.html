@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資訊圖 Prompt 生成器 v2</title>
+<link rel="icon" href="./logo2.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a class="nav-brand" href="index2.html">
+    <div class="nav-logo"><img src="./logo.svg" alt=""></div>
+    <div>
+      <span class="nav-title">資訊圖 Prompt 生成器<span class="ver">v2</span></span>
+      <!-- ★ 修改這裡換成你的名字和 Email ★ -->
+      <span class="nav-sub">心怡｜zoego99@gmail.com</span>
+    </div>
+  </a>
+</nav>
+
+<div class="app">
+  <!-- ===== LEFT：選擇視覺風格 ===== -->
+  <aside class="side">
+    <div class="side-head"><span class="num">1</span>選擇視覺風格</div>
+    <div id="side-list"></div>
+  </aside>
+
+  <!-- ===== MAIN：畫廊 / 細項 + Prompt（由 script2.js 動態生成） ===== -->
+  <main class="main" id="main"></main>
+</div>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lb" id="lb" onclick="if(event.target===this)closeLb()">
+  <div class="lb-box">
+    <button class="lb-close" onclick="closeLb()">✕</button>
+    <div class="lb-img-wrap">
+      <img id="lb-img" src="" alt="">
+      <button class="lb-arrow prev" onclick="lbNav(-1)">&#8592;</button>
+      <button class="lb-arrow next" onclick="lbNav(1)">&#8594;</button>
+    </div>
+    <div class="lb-info">
+      <div class="lb-title"><span id="lb-ai" class="ai-tag"></span><b id="lb-t"></b><span class="lb-count" id="lb-count"></span></div>
+      <div class="lb-d" id="lb-d"></div>
+    </div>
+  </div>
+</div>
+
+<script src="script2.js"></script>
+</body>
+</html>
