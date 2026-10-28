@@ -390,7 +390,7 @@ function renderSide(){
       ${list.map(s => `
         <div class="s-item" data-id="${s.id}" onclick="selectStyle(${s.id})">
           ${ph(img(s.cover), 's-thumb')}
-          <div><div class="s-name">${s.name}${s.isNew ? ' <span class="badge new" style="position:static;font-size:9px;padding:0 5px">NEW</span>' : ''}</div><div class="s-desc">${s.short}</div></div>
+          <div><div class="s-name">${s.name}</div><div class="s-desc">${s.short}</div></div>
         </div>`).join('')}
     </div>`;
   }).join('');
@@ -472,7 +472,6 @@ function renderDetail(){
 
   $('main').innerHTML = `
     <div class="wrap">
-      <button class="back" onclick="renderOverview()">← 全部風格總覽</button>
       <div class="d-head">
         <span class="tag">${gName(cur.group)}</span>
         <h1 class="d-title">${cur.name}</h1>
@@ -606,6 +605,55 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft')  lbNav(-1);
   if (e.key === 'ArrowRight') lbNav(1);
 });
+
+
+// ===================================================
+// HOVER PREVIEW（左側縮圖滑鼠移入放大）
+// ===================================================
+const hov = document.createElement('div');
+hov.id = 'hov';
+hov.innerHTML = '<img alt=""><div class="hov-cap"></div>';
+document.body.appendChild(hov);
+const hovImg = hov.querySelector('img');
+let hovThumb = null;
+
+function placeHov(){
+  if (!hovThumb) return;
+  const r    = hovThumb.getBoundingClientRect();
+  const left = document.querySelector('.side').getBoundingClientRect().right + 12;
+  const navH = document.querySelector('nav').offsetHeight;
+  hov.style.width = Math.min(580, window.innerWidth - left - 24) + 'px';
+  hov.style.left  = left + 'px';
+  const h = hov.offsetHeight;
+  let top = r.top + r.height / 2 - h / 2;
+  top = Math.max(navH + 8, Math.min(top, window.innerHeight - h - 12));
+  hov.style.top = top + 'px';
+}
+function hideHov(){ hovThumb = null; hov.classList.remove('show'); }
+
+hovImg.onload = placeHov;
+
+$('side-list').addEventListener('mouseover', e => {
+  const t = e.target.closest('.s-thumb');
+  if (!t || t === hovThumb) return;
+  if (!matchMedia('(hover:hover)').matches || window.innerWidth <= 860) return;
+  if (t.classList.contains('missing')) return;
+  const s = STYLES.find(x => x.id === +t.closest('.s-item').dataset.id);
+  hovThumb = t;
+  hovImg.src = img(s.cover);
+  hov.querySelector('.hov-cap').textContent = s.name;
+  hov.classList.add('show');
+  placeHov();
+});
+$('side-list').addEventListener('mouseout', e => {
+  if (e.target.closest('.s-thumb')) hideHov();
+});
+document.querySelector('.side').addEventListener('scroll', hideHov);
+$('side-list').addEventListener('click', hideHov);
+
+
+
+
 
 // ===================================================
 // INIT
